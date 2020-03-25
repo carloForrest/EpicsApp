@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct ResultsView: View {
-    @State var resultViewState = CGSize.zero
-    
+    @State var showArticles = false
     
     
     var body: some View {
@@ -18,6 +17,7 @@ struct ResultsView: View {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
+            //PageHeader
             VStack {
                 VStack {
                     HStack {
@@ -45,20 +45,21 @@ struct ResultsView: View {
                 
                 Spacer()
                 
+                //Cards
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(playerData) { item in
                             GeometryReader { geometry in
                                 PlayerCardMiniView(player: item)
                                     .rotation3DEffect(Angle(degrees:
-                                        Double(geometry.frame(in: .global).minX - 72) / -10
-                                    ), axis: (x: 0, y: 100, z: 0))
-                                
-                            }
+                                        Double(geometry.frame(in: .global).minX - 96) / -10
+                                    ), axis: (x: 0, y: 20, z: 0))
+                                    }
                             .frame(width: 215, height: 315)
                         }
                     }
-                    .padding(.horizontal, 24)
+                    .padding()
+                    .offset(x: 16, y: 0)
                 }
                 
                 Spacer()
@@ -74,6 +75,13 @@ struct ResultsView: View {
                 .cornerRadius(32)
                 
                 Spacer()
+                
+                Button(action: { self.showArticles.toggle() }) {
+                Text("Show Related Articles")
+                }
+                .sheet(isPresented: $showArticles) {
+                    ArticlesList()
+                }
             }
         }
     }
@@ -81,7 +89,7 @@ struct ResultsView: View {
 
 struct ResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultsView()
+        ResultsView().previewDevice("iPhone 11 Pro")
     }
 }
 
@@ -179,6 +187,22 @@ let playerData = [
         lastName: "Curry",
         att1: "93% | Experienced",
         att2: "74% | leader"
+    ),
+    
+    Player(
+        image: "player-card-paula-d",
+        firstName: "Paula",
+        lastName: "Dormiendo",
+        att1: "93% | Weird",
+        att2: "74% | But Cool"
+    ),
+    
+    Player(
+        image: " ",
+        firstName: " ",
+        lastName: " ",
+        att1: " ",
+        att2: " "
     ),
     
 ]
