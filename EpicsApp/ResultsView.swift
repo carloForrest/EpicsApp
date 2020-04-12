@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct ResultsView: View {
-    @State var showArticles = false
+    @Binding var showStory: Bool
+    @State var showFeed = false
     
     
     var body: some View {
@@ -17,9 +18,10 @@ struct ResultsView: View {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
-            //PageHeader
             VStack {
-                VStack {
+                
+                //PageHeader
+                VStack(alignment: .leading) {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("These players match you.")
@@ -41,6 +43,7 @@ struct ResultsView: View {
                         .shadow(color: Color(#colorLiteral(red: 0.4509803922, green: 0.3843137255, blue: 0.968627451, alpha: 1)).opacity(0.25), radius: 6, x: 0, y: 0)
                 }
                 .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
                 )
                 
                 Spacer()
@@ -48,14 +51,28 @@ struct ResultsView: View {
                 //Cards
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
+                        VStack{
+                            Spacer()
+                                .frame(width: 30, height: 360)
+                        }
                         ForEach(playerData) { item in
                             GeometryReader { geometry in
                                 PlayerCardMiniView(player: item)
                                     .rotation3DEffect(Angle(degrees:
-                                        Double(geometry.frame(in: .global).minX - 96) / -10
+                                        Double(geometry.frame(in: .global).minX - 70) / -10
                                     ), axis: (x: 0, y: 20, z: 0))
-                                    }
-                            .frame(width: 215, height: 315)
+                            }
+                            .frame(width: 230, height: 360)
+                            .onTapGesture {
+                                withAnimation {
+                                    self.showStory = true
+                                }
+                            }
+                        }
+                        
+                        VStack{
+                            Spacer()
+                                .frame(width: 60, height: 360)
                         }
                     }
                     .padding()
@@ -74,14 +91,7 @@ struct ResultsView: View {
                 .background(Color(#colorLiteral(red: 0.3921568627, green: 0.3921568627, blue: 0.7882352941, alpha: 1)))
                 .cornerRadius(32)
                 
-                Spacer()
                 
-                Button(action: { self.showArticles.toggle() }) {
-                Text("Show Related Articles")
-                }
-                .sheet(isPresented: $showArticles) {
-                    ArticlesList()
-                }
             }
         }
     }
@@ -89,7 +99,7 @@ struct ResultsView: View {
 
 struct ResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultsView().previewDevice("iPhone 11 Pro")
+        ResultsView(showStory: .constant(false))
     }
 }
 
@@ -145,6 +155,7 @@ struct PlayerCardMiniView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
+        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.1018100792)), Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.5)), Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.9567011444))]), startPoint: .top, endPoint: .bottom))
         .background(
             Image(player.image)
                 .resizable()
@@ -168,41 +179,11 @@ struct Player: Identifiable {
 
 let playerData = [
     Player(
-        image: "player-card-lebron-james",
+        image: "card-player1",
         firstName: "Lebron",
         lastName: "James",
         att1: "98% | Experienced",
         att2: "94% | Versatile"
-    ),
-    Player(
-        image: "player-card-kyle-lowry",
-        firstName: "Kyle",
-        lastName: "Lowry",
-        att1: "93% | Resilient",
-        att2: "89% | Leader"
-    ),
-    Player(
-        image: "player-card-steph-curry",
-        firstName: "Stephen",
-        lastName: "Curry",
-        att1: "93% | Experienced",
-        att2: "74% | leader"
-    ),
-    
-    Player(
-        image: "player-card-paula-d",
-        firstName: "Paula",
-        lastName: "Dormiendo",
-        att1: "93% | Weird",
-        att2: "74% | But Cool"
-    ),
-    
-    Player(
-        image: " ",
-        firstName: " ",
-        lastName: " ",
-        att1: " ",
-        att2: " "
     ),
     
 ]
