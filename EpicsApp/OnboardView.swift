@@ -19,19 +19,28 @@ struct OnboardView: View {
             VStack {
                 Spacer()
                 Image(onboardImage[stepCounter])
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 360, alignment: .center)
                 Spacer()
+                
                 HStack {
-                    VStack(alignment: .leading){
+                    VStack(alignment: .leading, spacing: 8){
                         Text(onboardTitle[stepCounter])
-                            .font(.largeTitle)
+                            .font(.system(size: 36))
+                            .font(.title)
+                            .kerning(-1)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
                             .transition(.opacity)
                             .animation(.easeOut(duration: 0.4))
                         
                         Text(onboardBody[stepCounter])
+                            .font(.system(size: 16))
                             .font(.subheadline)
-                            .foregroundColor(Color.white)
+                            .kerning(0.2)
+                            .fontWeight(.regular)
+                            .foregroundColor(Color(#colorLiteral(red: 0.768627451, green: 0.768627451, blue: 0.9098039216, alpha: 1)))
                             .transition(.opacity)
                             .animation(.easeOut(duration: 0.4))
                     }
@@ -42,21 +51,26 @@ struct OnboardView: View {
                 
                 HStack {
                     Button(action: { self.stepCounter -= 1 }) {
-                        Image(systemName: "arrow.left")
-                        Text("Back")
+                        Image(systemName: "arrow.left.circle")
+                        Text("Back".uppercased())
+                            .font(.subheadline)
+                            .kerning(2)
                     }
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
                     
                     Spacer()
                     
                     Button(action: { self.stepCounter += 1 }) {
-                        Text("Next")
-                        Image(systemName: "arrow.right")
+                        Text("Next".uppercased())
+                            .font(.subheadline)
+                            .kerning(2)
+                        Image(systemName: "arrow.right.circle")
                     }
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
                 }
                 .padding(.horizontal, 48)
             }
+            .padding()
         }
     }
 }
@@ -74,7 +88,8 @@ let onboardImage = [
     "onboard3",
     "onboard4",
     "onboard5",
-    "onboard1"
+    "onboard5",
+    "onboard5"
 ]
 
 let onboardTitle = [
@@ -84,7 +99,8 @@ let onboardTitle = [
     "Explore the players we recommend.",
     "Follow a player.",
     "Get started.",
-    "TOO MANY"
+    "Get started.",
+    "Get started."
 ]
 
 let onboardBody = [
@@ -94,6 +110,7 @@ let onboardBody = [
     "Discover the stories of the players we suggest based on the results of your quiz.",
     "Choose from the players we suggest and get notified about stories, highlights and updates on those players.",
     "Take the quiz and discover your player.",
-    "TOO MANY"
+    "Take the quiz and discover your player.",
+    "Take the quiz and discover your player.",
     
 ]

@@ -23,19 +23,21 @@ struct MyFeedView: View {
                 VStack {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("MyFeed")
-                                .font(.largeTitle)
+                            Text("My Feed")
+                                .font(.system(size: 36))
+                                .font(.title)
+                                .kerning(-1)
                                 .fontWeight(.bold)
-                                .foregroundColor(Color.white)
+                                .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
                         }
-                        .padding(.top, 72)
-                        .padding(.bottom, 24)
+                        .padding(.top, 48)
+                        .padding(.bottom, 32)
                         .padding(.horizontal, 24)
                         Spacer()
                     }
                 }
-                .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .top, endPoint: .bottom))
-                .edgesIgnoringSafeArea(.all)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all))
                 
                 Spacer()
                 
@@ -68,7 +70,7 @@ struct MyFeedView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 24)
-                    .padding(.top, 8)
+                    .padding(.top, 16)
                     .padding(.bottom, 16)
                 }
                 

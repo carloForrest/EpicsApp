@@ -20,26 +20,31 @@ struct StoryView: View {
             Image(storyImage[storyCount])
             
             VStack(alignment: .leading) {
-                VStack(alignment: .leading) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Spacer()
+                        Text(storyTitle[storyCount].uppercased())
+                            .font(.headline)
+                            .fontWeight(.light)
+                            .foregroundColor(Color.white)
+                            .kerning(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+                            .transition(.opacity)
+                            .animation(.easeOut(duration: 0.6))
+                        
+                        
+                        Text(storyBody[storyCount])
+                            .font(.system(size: 28))
+                            .font(.title)
+                            .kerning(-1)
+                            .fontWeight(.bold)
+                            .lineSpacing(4)
+                            .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
+                            .transition(.opacity)
+                            .animation(.easeOut(duration: 0.4))
+                    }
+                    .padding(.horizontal, 36)
                     Spacer()
-                    Text(storyTitle[storyCount].uppercased())
-                        .font(.headline)
-                        .fontWeight(.light)
-                        .foregroundColor(Color.white)
-                        .kerning(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-                        .transition(.opacity)
-                        .animation(.easeOut(duration: 0.6))
-                    
-                    
-                    Text(storyBody[storyCount])
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .transition(.opacity)
-                        .animation(.easeOut(duration: 0.4))
                 }
-                .padding(.horizontal, 32)
-                .offset(y: -24)
                 
                 HStack {
                     Button(action: {
@@ -48,17 +53,33 @@ struct StoryView: View {
                     } else {
                         self.showStory.toggle()
                     }}) {
-                        Image(systemName: "arrow.left")
-                        Text("Back")
+                        Image(systemName: "arrow.left.circle")
+                            .font(.system(size: 16))
+                        Text("Back".uppercased())
+                            .font(.system(size: 14))
+                            .font(.subheadline)
+                            .kerning(2)
+                            .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
                     }
                     .foregroundColor(Color.white)
                     
                     Spacer()
                     
                     Button(action: { self.showArticles.toggle() }) {
-                        Text("Read More")
+                        Text("Read More".uppercased())
+                            .font(.system(size: 14))
+                            .font(.subheadline)
+                            .kerning(2)
+                            .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
                         Image(systemName: "arrow.up")
+                            .font(.system(size: 16))
                     }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)), lineWidth: 1)
+                    )
                     .sheet(isPresented: $showArticles) {
                         ArticlesList()
                     }
@@ -74,12 +95,17 @@ struct StoryView: View {
                         }
                         
                     }) {
-                        Text("Next")
-                        Image(systemName: "arrow.right")
+                        Text("Next".uppercased())
+                        .font(.system(size: 14))
+                            .font(.subheadline)
+                            .kerning(2)
+                            .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
+                        Image(systemName: "arrow.right.circle")
+                            .font(.system(size: 16))
                     }
                     .foregroundColor(Color.white)
                 }
-                .padding(48)
+                .padding(36)
                 
             }
             
@@ -115,7 +141,7 @@ let storyTitle = [
 
 let storyBody = [
     
-    "Lowry was drafted by the Memphis Grizzlies. He became known for his tenacity, fearlessness, and leadership.",
+    "Lowry was drafted by the Memphis Grizzlies. \nHe became known for his tenacity, fearlessness, and leadership.",
     "He landed in Toronto following a trade and formed a friendship with teammate DeMar DeRozan.",
     "For several years they played well in the regular season, only to be defeated by LeBron James in the playoffs.",
     "In 2018 DeRozan was traded to the San Antonio Spurs for Kawhi Leonard– an MVP caliber talent.",

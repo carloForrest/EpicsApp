@@ -17,9 +17,11 @@ struct ArticlesList: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Related Articles")
+                            .font(.system(size: 32))
                             .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color.white)
+                            .kerning(-1)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
                         Spacer()
                     }
                     Text("Leonard–Derozan Trade")
@@ -30,10 +32,9 @@ struct ArticlesList: View {
                 
                 Spacer()
                 
-                
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 12) {
-                        ForEach(articleData) { item in
+                        ForEach(articleData.shuffled()) { item in
                             ArticleCardView(article: item)
                         }
                     }
@@ -131,34 +132,34 @@ let articleData = [
     
     Article2(
         articleImage: "player-article2",
-        source: "The New York Times",
+        source: "The Athletic",
         title: "Lebron James Jumps Ship and Heads to Cleveland",
-        author: "Marc Stein",
-        authorImage: "face-author1"
+        author: "Eric Koreen",
+        authorImage: "face-author2"
     ),
     
     Article2(
         articleImage: "player-article3",
-        source: "The New York Times",
+        source: "The Score",
         title: "Raptors Rout Trailblazers in 112-89 win",
-        author: "Marc Stein",
-        authorImage: "face-author1"
+        author: "Jason Concepcion",
+        authorImage: "face-author3"
     ),
     
     Article2(
         articleImage: "player-article4",
-        source: "The New York Times",
+        source: "Global News",
         title: "Is Giannis Antetokounmpo Trying Too Hard?",
-        author: "Marc Stein",
-        authorImage: "face-author1"
+        author: "Kevin O'Connor",
+        authorImage: "face-author4"
     ),
     
     Article2(
         articleImage: "player-article5",
-        source: "The New York Times",
+        source: "ESPN",
         title: "Gar-Pax Wanted Dead or Alive by Bulls Mascot",
-        author: "Marc Stein",
-        authorImage: "face-author1"
+        author: "Bill Simmons",
+        authorImage: "face-author5"
     ),
     
 ]

@@ -23,16 +23,21 @@ struct ResultsView: View {
                 //PageHeader
                 VStack(alignment: .leading) {
                     HStack {
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 8) {
                             Text("These players match you.")
-                                .font(.largeTitle)
+                                .font(.system(size: 36))
+                                .font(.title)
+                                .kerning(-1)
                                 .fontWeight(.bold)
-                                .foregroundColor(Color.white)
+                                .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
                             Text("Find out more about them.")
-                                .font(.subheadline)
-                                .foregroundColor(Color.white)
+                                .font(.system(size: 18))
+                                .font(.headline)
+                                .kerning(0.5)
+                                .fontWeight(.regular)
+                                .foregroundColor(Color(#colorLiteral(red: 0.768627451, green: 0.768627451, blue: 0.9098039216, alpha: 1)))
                         }
-                        .padding(.top, 72)
+                        .padding(.top, 48)
                         .padding(.bottom, 32)
                         .padding(.horizontal, 24)
                         Spacer()
@@ -50,19 +55,19 @@ struct ResultsView: View {
                 
                 //Cards
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
+                    HStack(spacing: 8) {
                         VStack{
                             Spacer()
-                                .frame(width: 30, height: 360)
+                                .frame(width: 40, height: 360)
                         }
-                        ForEach(playerData) { item in
+                        ForEach(playerData.shuffled()) { item in
                             GeometryReader { geometry in
                                 PlayerCardMiniView(player: item)
                                     .rotation3DEffect(Angle(degrees:
                                         Double(geometry.frame(in: .global).minX - 70) / -10
                                     ), axis: (x: 0, y: 20, z: 0))
                             }
-                            .frame(width: 230, height: 360)
+                            .frame(width: 260, height: 400)
                             .onTapGesture {
                                 withAnimation {
                                     self.showStory.toggle()
@@ -72,24 +77,28 @@ struct ResultsView: View {
                         
                         VStack{
                             Spacer()
-                                .frame(width: 60, height: 360)
+                                .frame(width: 40, height: 360)
                         }
                     }
                     .padding()
-                    .offset(x: 16, y: 0)
+                    .offset(x: 0, y: 0)
                 }
                 
                 Spacer()
                 
                 Button(action: { self.showFeed.toggle() }) {
                     Text(/*@START_MENU_TOKEN@*/"Follow Player"/*@END_MENU_TOKEN@*/.uppercased())
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
                         .kerning(3)
                 }
-                .padding(.horizontal, 72)
-                .padding(.vertical, 18)
-                .background(Color(#colorLiteral(red: 0.3921568627, green: 0.3921568627, blue: 0.7882352941, alpha: 1)))
+                .padding(.horizontal, 32)
+                .padding(.vertical, 12)
+                .background(Color(#colorLiteral(red: 0.0758826858, green: 0.0758826858, blue: 0.1180397335, alpha: 1)))
                 .cornerRadius(32)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 32)
+                        .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.5)), lineWidth: 2)
+                )
                 
                 
             }
@@ -108,54 +117,61 @@ struct PlayerCardMiniView: View {
     
     var body: some View {
         VStack(alignment: .leading){
+            
             Spacer()
-            HStack {
-                Text(player.firstName.uppercased())
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(Color.white)
-            }
-            HStack {
-                Text(player.lastName.uppercased())
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(Color.white)
-                    .kerning(-1)
-            }
             
-            HStack {
-                Text(player.att1.uppercased())
-                    .font(.system(size: 10, design: .monospaced))
-                    .foregroundColor(Color.white)
-                    .kerning(3)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(player.firstName.uppercased())
+                        .font(.headline)
+                        .fontWeight(.medium)
+                        .foregroundColor(Color.white)
+                        .kerning(1)
+                }
+                HStack {
+                    Text(player.lastName.uppercased())
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .foregroundColor(Color.white)
+                        .kerning(-1)
+                }
+                
+                HStack {
+                    Text(player.att1.uppercased())
+                        .font(.system(size: 14, design: .monospaced))
+                        .foregroundColor(Color.white)
+                        .kerning(3)
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 1)),Color(#colorLiteral(red: 0.3215686275, green: 0.3215686275, blue: 0.7058823529, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .cornerRadius(12)
+                
+                HStack {
+                    Text(player.att2.uppercased())
+                        .font(.system(size: 14, design: .monospaced))
+                        .foregroundColor(Color.white)
+                        .kerning(3)
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 1)),Color(#colorLiteral(red: 0.3215686275, green: 0.3215686275, blue: 0.7058823529, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .cornerRadius(12)
+                .padding(.bottom, 8)
+                
+                HStack {
+                    Text("View Story".uppercased())
+                        .font(.subheadline)
+                        .kerning(3)
+                    Image(systemName: "arrow.right")
+                }
+                .foregroundColor(Color.white)
             }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(Color.black)
-            .cornerRadius(16)
-            
-            HStack {
-                Text(player.att2.uppercased())
-                    .font(.system(size: 10, design: .monospaced))
-                    .foregroundColor(Color.white)
-                    .kerning(3)
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(Color.black)
-            .cornerRadius(16)
-            
-            HStack {
-                Text("View Story".uppercased())
-                    .font(.subheadline)
-                    .kerning(3)
-                Image(systemName: "arrow.right")
-            }
-            .foregroundColor(Color.white)
+            .padding(.bottom, 16)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.1018100792)), Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.5)), Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.9567011444))]), startPoint: .top, endPoint: .bottom))
+        .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 0)), Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 0)),Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 0.5)),Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 0.801331426)), Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 1))]), startPoint: .top, endPoint: .bottom))
         .background(
             Image(player.image)
                 .resizable()
@@ -165,6 +181,10 @@ struct PlayerCardMiniView: View {
             .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)).opacity(0.06), radius: 24, x: 0, y: 16)
             .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)).opacity(0.04), radius: 6, x: 0, y: 2)
             .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)).opacity(0.04), radius: 1, x: 0, y: 0)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.8212753081)), lineWidth: 2)
+        )
     }
 }
 
@@ -182,22 +202,24 @@ let playerData = [
         image: "card-kyle",
         firstName: "Kyle",
         lastName: "Lowry",
-        att1: "98% | Experienced",
-        att2: "94% | Versatile"
+        att1: "98%|Experienced",
+        att2: "94%|Versatile"
     ),
+    
     Player(
         image: "card-lebron",
         firstName: "Lebron",
         lastName: "James",
-        att1: "98% | Experienced",
-        att2: "96% | Versatile"
+        att1: "98%|Experienced",
+        att2: "96%|Versatile"
     ),
+    
     Player(
         image: "card-steph",
         firstName: "Stephen",
         lastName: "Curry",
-        att1: "93% | Experienced",
-        att2: "87% | Leader"
+        att1: "93%|Experienced",
+        att2: "87%|Leader"
     ),
     
 ]

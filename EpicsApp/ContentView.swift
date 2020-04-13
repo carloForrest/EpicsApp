@@ -28,14 +28,14 @@ struct ContentView: View {
             
             if stepCounter == 5 {
                 QuizView(tapCount: $tapCount)
-                    .transition(.opacity)
-                    .animation(.easeOut(duration: 0.4))
+                    .transition(.slide)
+                    .animation(.easeOut(duration: 0.8))
             }
             
             if tapCount == 5 {
                 ResultsView(showStory: $showStory, showFeed: $showFeed)
-                    .transition(.opacity)
-                    .animation(.easeOut(duration: 0.4))
+                    .transition(.slide)
+                    .animation(.easeOut(duration: 0.8))
             }
             
             //ResultsView(showStory: $showStory)
@@ -45,27 +45,14 @@ struct ContentView: View {
                 StoryView(storyCount: $storyCount, showStory: $showStory)
                     .transition(.scale)
                     .animation(.easeOut(duration: 0.4))
-                
-                VStack {
-                    HStack {
-                        Image(systemName: "xmark")
-                            .frame(width:36, height: 36)
-                            .foregroundColor(.white)
-                            .background(Color.black)
-                            .clipShape(Circle())
-                    }
-                }
-                .onTapGesture {
-                    self.showStory.toggle()
-                }
             }
             
             
             if showFeed {
                 
                 MyFeedView(showQuiz: $showQuiz)
-                    .transition(.opacity)
-                    .animation(.easeOut(duration: 0.4))
+                    .transition(.slide)
+                    .animation(.easeOut(duration: 0.8))
                 
             }
             
