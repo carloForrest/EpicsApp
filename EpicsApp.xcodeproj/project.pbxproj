@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		992F9E5D24415EE000B47020 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992F9E5C24415EE000B47020 /* StoryView.swift */; };
 		992F9E5F244183D200B47020 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992F9E5E244183D200B47020 /* QuizView.swift */; };
-		992F9E612442B7E400B47020 /* StoryNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992F9E602442B7E400B47020 /* StoryNavView.swift */; };
 		995321CB24354DA100DDFA42 /* MyFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995321CA24354DA100DDFA42 /* MyFeedView.swift */; };
 		997C4849242BBFA600F3D1A4 /* ArticlesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997C4848242BBFA600F3D1A4 /* ArticlesList.swift */; };
 		997D94D6242AE7E50017FD65 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997D94D5242AE7E50017FD65 /* ResultsView.swift */; };
@@ -28,7 +27,6 @@
 /* Begin PBXFileReference section */
 		992F9E5C24415EE000B47020 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		992F9E5E244183D200B47020 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
-		992F9E602442B7E400B47020 /* StoryNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryNavView.swift; sourceTree = "<group>"; };
 		995321CA24354DA100DDFA42 /* MyFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedView.swift; sourceTree = "<group>"; };
 		997C4848242BBFA600F3D1A4 /* ArticlesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesList.swift; sourceTree = "<group>"; };
 		997D94D5242AE7E50017FD65 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 				992F9E5E244183D200B47020 /* QuizView.swift */,
 				997D94D5242AE7E50017FD65 /* ResultsView.swift */,
 				992F9E5C24415EE000B47020 /* StoryView.swift */,
-				992F9E602442B7E400B47020 /* StoryNavView.swift */,
 				997C4848242BBFA600F3D1A4 /* ArticlesList.swift */,
 				995321CA24354DA100DDFA42 /* MyFeedView.swift */,
 				99846819242D438F00468362 /* Players.json */,
@@ -183,7 +180,6 @@
 				997C4849242BBFA600F3D1A4 /* ArticlesList.swift in Sources */,
 				995321CB24354DA100DDFA42 /* MyFeedView.swift in Sources */,
 				99846822242D529C00468362 /* DragTestView.swift in Sources */,
-				992F9E612442B7E400B47020 /* StoryNavView.swift in Sources */,
 				992F9E5D24415EE000B47020 /* StoryView.swift in Sources */,
 				99846820242D4E5200468362 /* FetchTestView.swift in Sources */,
 				99846824242EA27B00468362 /* OnboardView.swift in Sources */,

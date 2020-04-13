@@ -17,7 +17,7 @@ struct StoryView: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
-            Image("story-player1")
+            Image(storyImage[storyCount])
             
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
@@ -43,7 +43,7 @@ struct StoryView: View {
                 
                 HStack {
                     Button(action: {
-                        if self.storyCount > -1 {
+                        if self.storyCount > 0 {
                         self.storyCount -= 1
                     } else {
                         self.showStory.toggle()
@@ -67,7 +67,7 @@ struct StoryView: View {
                     Spacer()
                     
                     Button(action: {
-                        if self.storyCount < 5 {
+                        if self.storyCount < 4 {
                             self.storyCount += 1
                         } else {
                             self.showStory.toggle()

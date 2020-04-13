@@ -44,11 +44,12 @@ struct MyFeedView: View {
                         FeedFilterView()
                         
                         VStack {
-                            Image(systemName: "plus")
+                            Image(systemName: "plus.circle")
                                 .aspectRatio(contentMode: .fill)
-                                .foregroundColor(Color.white)
+                                .font(.system(size: 32, weight: .regular))
+                                .foregroundColor(Color(#colorLiteral(red: 0.2624634526, green: 0.2624634526, blue: 0.5, alpha: 1)))
                                 .frame(width: 48, height: 48)
-                                .background(Color.gray)
+                                .background(Color(#colorLiteral(red: 0.7571957495, green: 0.7571957495, blue: 0.8055952905, alpha: 1)))
                                 .clipShape(Circle())
                             
                             Text("Add Player")
@@ -94,18 +95,19 @@ struct MyFeedView_Previews: PreviewProvider {
 struct FeedFilterView: View {
     var body: some View {
         VStack {
-            Image("face-player1")
+            Image("face-kyle")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 48, height: 48)
+                .background(Color(#colorLiteral(red: 0.7040602993, green: 0.3043584473, blue: 0.2460004904, alpha: 1)))
                 .clipShape(Circle())
                 .overlay(
                     RoundedRectangle(cornerRadius: 40)
-                        .stroke(Color.white, lineWidth: 1)
+                        .stroke(Color(#colorLiteral(red: 1, green: 0.3997854313, blue: 0.3997854313, alpha: 1)), lineWidth: 1.5)
                         .frame(width: 56, height: 56)
                 )
             
-            Text("Player Name")
+            Text("Kyle Lowry")
                 .font(.footnote)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.center)

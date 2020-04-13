@@ -128,4 +128,37 @@ let articleData = [
         author: "Marc Stein",
         authorImage: "face-author1"
     ),
+    
+    Article2(
+        articleImage: "player-article2",
+        source: "The New York Times",
+        title: "Lebron James Jumps Ship and Heads to Cleveland",
+        author: "Marc Stein",
+        authorImage: "face-author1"
+    ),
+    
+    Article2(
+        articleImage: "player-article3",
+        source: "The New York Times",
+        title: "Raptors Rout Trailblazers in 112-89 win",
+        author: "Marc Stein",
+        authorImage: "face-author1"
+    ),
+    
+    Article2(
+        articleImage: "player-article4",
+        source: "The New York Times",
+        title: "Is Giannis Antetokounmpo Trying Too Hard?",
+        author: "Marc Stein",
+        authorImage: "face-author1"
+    ),
+    
+    Article2(
+        articleImage: "player-article5",
+        source: "The New York Times",
+        title: "Gar-Pax Wanted Dead or Alive by Bulls Mascot",
+        author: "Marc Stein",
+        authorImage: "face-author1"
+    ),
+    
 ]
