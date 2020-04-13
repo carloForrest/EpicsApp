@@ -10,10 +10,12 @@ import SwiftUI
 
 struct StoryNavView: View {
     @State var showArticles = false
+    @Binding var storyCount: Int
+    @Binding var showStory: Bool
     
     var body: some View {
         HStack {
-            Button(action: {}) {
+            Button(action: { self.storyCount -= 1 }) {
                 Image(systemName: "arrow.left")
                 Text("Back")
             }
@@ -32,7 +34,14 @@ struct StoryNavView: View {
             
             Spacer()
             
-            Button(action: {}) {
+            Button(action: {
+                if self.storyCount < 5 {
+                    self.storyCount += 1
+                } else {
+                    self.showStory.toggle()
+                }
+                
+            }) {
                 Text("Next")
                 Image(systemName: "arrow.right")
             }
@@ -44,6 +53,6 @@ struct StoryNavView: View {
 
 struct StoryNavView_Previews: PreviewProvider {
     static var previews: some View {
-        StoryNavView()
+        StoryNavView(storyCount: .constant(0), showStory: .constant(false))
     }
 }

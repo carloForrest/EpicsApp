@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct QuizView: View {
-    @State var tapCount = 0
+    @Binding var tapCount: Int
     
     var body: some View {
+        
+        
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 1))]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-            
+                .edgesIgnoringSafeArea(.all)            
             
             VStack {
                 //PageHeader
@@ -47,10 +48,10 @@ struct QuizView: View {
                 Spacer()
                 
                 VStack {
-                    Button(action: {self.tapCount += 1}) {
-                        Text("Experience")
-                        .font(.title)
-                        .fontWeight(.bold)
+                    Button(action: { self.tapCount += 1 }) {
+                        Text(answersOne[tapCount])
+                            .font(.title)
+                            .fontWeight(.bold)
                             .foregroundColor(Color.white)
                     }
                     .frame(width: 320, height: 84, alignment: .center)
@@ -59,11 +60,11 @@ struct QuizView: View {
                     
                     Spacer()
                     
-                    Button(action: {self.tapCount += 1}) {
-                        Text("Youth")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
+                    Button(action: { self.tapCount += 1 }) {
+                        Text(answersTwo[tapCount])
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
                     }
                     .frame(width: 320, height: 84, alignment: .center)
                     .background(Color(#colorLiteral(red: 0.3921568627, green: 0.3921568627, blue: 0.7882352941, alpha: 1)))
@@ -76,13 +77,22 @@ struct QuizView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 4))
                 
             }
-            
         }
     }
+    
+    
 }
 
 struct QuizView_Previews: PreviewProvider {
     static var previews: some View {
-        QuizView()
+        QuizView(tapCount: .constant(0))
     }
 }
+
+let answersOne = [
+    "Youth", "Versatility", "Confidence", "Expressiveness", "Leadership", "0"
+]
+
+let answersTwo = [
+    "Experience", "Specialization", "Humility", "Calmness", "Following", "0"
+]

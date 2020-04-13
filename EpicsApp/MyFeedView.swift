@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct MyFeedView: View {
+    @Binding var showQuiz: Bool
+    
     var body: some View {
         
         ZStack {
@@ -39,12 +41,34 @@ struct MyFeedView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
-                    FeedFilterView()
-                    Spacer()
-                }
-                .padding(.horizontal, 24)
-                .padding(.top, 8)
-                .padding(.bottom, 16)
+                        FeedFilterView()
+                        
+                        VStack {
+                            Image(systemName: "plus")
+                                .aspectRatio(contentMode: .fill)
+                                .foregroundColor(Color.white)
+                                .frame(width: 48, height: 48)
+                                .background(Color.gray)
+                                .clipShape(Circle())
+                            
+                            Text("Add Player")
+                                .font(.footnote)
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 48)
+                                .lineSpacing(/*@START_MENU_TOKEN@*/-2.0/*@END_MENU_TOKEN@*/)
+                        }
+                        .onTapGesture {
+                            withAnimation {
+                                self.showQuiz = true
+                            }
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 8)
+                    .padding(.bottom, 16)
                 }
                 
                 Spacer()
@@ -63,7 +87,7 @@ struct MyFeedView: View {
 
 struct MyFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        MyFeedView()
+        MyFeedView(showQuiz: .constant(false))
     }
 }
 
@@ -75,6 +99,11 @@ struct FeedFilterView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 48, height: 48)
                 .clipShape(Circle())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color.white, lineWidth: 1)
+                        .frame(width: 56, height: 56)
+                )
             
             Text("Player Name")
                 .font(.footnote)

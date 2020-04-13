@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ResultsView: View {
     @Binding var showStory: Bool
-    @State var showFeed = false
+    @Binding var showFeed: Bool
     
     
     var body: some View {
@@ -65,7 +65,7 @@ struct ResultsView: View {
                             .frame(width: 230, height: 360)
                             .onTapGesture {
                                 withAnimation {
-                                    self.showStory = true
+                                    self.showStory.toggle()
                                 }
                             }
                         }
@@ -81,7 +81,7 @@ struct ResultsView: View {
                 
                 Spacer()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: { self.showFeed.toggle() }) {
                     Text(/*@START_MENU_TOKEN@*/"Follow Player"/*@END_MENU_TOKEN@*/.uppercased())
                         .foregroundColor(Color.white)
                         .kerning(3)
@@ -99,7 +99,7 @@ struct ResultsView: View {
 
 struct ResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultsView(showStory: .constant(false))
+        ResultsView(showStory: .constant(false), showFeed: .constant(false))
     }
 }
 
@@ -179,11 +179,25 @@ struct Player: Identifiable {
 
 let playerData = [
     Player(
-        image: "card-player1",
+        image: "card-kyle",
+        firstName: "Kyle",
+        lastName: "Lowry",
+        att1: "98% | Experienced",
+        att2: "94% | Versatile"
+    ),
+    Player(
+        image: "card-lebron",
         firstName: "Lebron",
         lastName: "James",
         att1: "98% | Experienced",
-        att2: "94% | Versatile"
+        att2: "96% | Versatile"
+    ),
+    Player(
+        image: "card-steph",
+        firstName: "Stephen",
+        lastName: "Curry",
+        att1: "93% | Experienced",
+        att2: "87% | Leader"
     ),
     
 ]
