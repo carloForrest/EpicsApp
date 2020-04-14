@@ -10,6 +10,7 @@ import SwiftUI
 
 struct OnboardView: View {
     @Binding var stepCounter: Int
+    @State var firstPage = true
     
     var body: some View {
         ZStack {
@@ -36,7 +37,7 @@ struct OnboardView: View {
                             .animation(.easeOut(duration: 0.4))
                         
                         Text(onboardBody[stepCounter])
-                            .font(.system(size: 16))
+                            .font(.system(size: 18))
                             .font(.subheadline)
                             .kerning(0.2)
                             .fontWeight(.regular)
@@ -44,7 +45,6 @@ struct OnboardView: View {
                             .transition(.opacity)
                             .animation(.easeOut(duration: 0.4))
                     }
-                    Spacer()
                 }
                 .padding(.horizontal, 32)
                 Spacer()
@@ -56,11 +56,12 @@ struct OnboardView: View {
                             .font(.subheadline)
                             .kerning(2)
                     }
+                    .offset(x: firstPage ? 0 : -300)
                     .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
                     
                     Spacer()
                     
-                    Button(action: { self.stepCounter += 1 }) {
+                    Button(action: { self.stepCounter += 1 } ) {
                         Text("Next".uppercased())
                             .font(.subheadline)
                             .kerning(2)
@@ -70,7 +71,6 @@ struct OnboardView: View {
                 }
                 .padding(.horizontal, 48)
             }
-            .padding()
         }
     }
 }

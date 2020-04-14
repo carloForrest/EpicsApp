@@ -100,11 +100,11 @@ struct ArticleCardView: View {
                 Rectangle()
                 .foregroundColor(.clear)
                 .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.1018100792)), Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.5)), Color(#colorLiteral(red: 0.1137254902, green: 0.1137254902, blue: 0.1647058824, alpha: 0.9567011444))]), startPoint: .top, endPoint: .bottom)
-                .frame(width: 363-32, height: 261-32))
+                .frame(width: 363, height: 261))
 
             }
         )
-        .frame(width: 363-32, height: 261-32)
+        .frame(width: 363, height: 261)
         .cornerRadius(8)
     }
     

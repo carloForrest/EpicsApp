@@ -17,7 +17,10 @@ struct StoryView: View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.05098039216, green: 0.05098039216, blue: 0.05882352941, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
+            
             Image(storyImage[storyCount])
+            .resizable()
+            .aspectRatio(contentMode: .fit)
             
             VStack(alignment: .leading) {
                 HStack {
@@ -29,8 +32,7 @@ struct StoryView: View {
                             .foregroundColor(Color.white)
                             .kerning(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                             .transition(.opacity)
-                            .animation(.easeOut(duration: 0.6))
-                        
+                            .animation(.easeOut(duration: 0.6))                       
                         
                         Text(storyBody[storyCount])
                             .font(.system(size: 28))
@@ -42,9 +44,9 @@ struct StoryView: View {
                             .transition(.opacity)
                             .animation(.easeOut(duration: 0.4))
                     }
-                    .padding(.horizontal, 36)
-                    Spacer()
                 }
+                .padding(.horizontal, 32)
+                Spacer()
                 
                 HStack {
                     Button(action: {

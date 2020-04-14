@@ -13,7 +13,6 @@
 		997C4849242BBFA600F3D1A4 /* ArticlesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997C4848242BBFA600F3D1A4 /* ArticlesList.swift */; };
 		997D94D6242AE7E50017FD65 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997D94D5242AE7E50017FD65 /* ResultsView.swift */; };
 		9984681A242D438F00468362 /* Players.json in Resources */ = {isa = PBXBuildFile; fileRef = 99846819242D438F00468362 /* Players.json */; };
-		99846820242D4E5200468362 /* FetchTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984681F242D4E5200468362 /* FetchTestView.swift */; };
 		99846822242D529C00468362 /* DragTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99846821242D529C00468362 /* DragTestView.swift */; };
 		99846824242EA27B00468362 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99846823242EA27B00468362 /* OnboardView.swift */; };
 		99A0AAB32427FFB300F13F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A0AAB22427FFB300F13F79 /* AppDelegate.swift */; };
@@ -31,10 +30,9 @@
 		997C4848242BBFA600F3D1A4 /* ArticlesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesList.swift; sourceTree = "<group>"; };
 		997D94D5242AE7E50017FD65 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		99846819242D438F00468362 /* Players.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Players.json; sourceTree = "<group>"; };
-		9984681F242D4E5200468362 /* FetchTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTestView.swift; sourceTree = "<group>"; };
 		99846821242D529C00468362 /* DragTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTestView.swift; sourceTree = "<group>"; };
 		99846823242EA27B00468362 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
-		99A0AAAF2427FFB300F13F79 /* EpicsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpicsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99A0AAAF2427FFB300F13F79 /* Epics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99A0AAB22427FFB300F13F79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99A0AAB42427FFB300F13F79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		99A0AAB62427FFB300F13F79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,7 +64,7 @@
 		99A0AAB02427FFB300F13F79 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				99A0AAAF2427FFB300F13F79 /* EpicsApp.app */,
+				99A0AAAF2427FFB300F13F79 /* Epics.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,7 +82,6 @@
 				997C4848242BBFA600F3D1A4 /* ArticlesList.swift */,
 				995321CA24354DA100DDFA42 /* MyFeedView.swift */,
 				99846819242D438F00468362 /* Players.json */,
-				9984681F242D4E5200468362 /* FetchTestView.swift */,
 				99846821242D529C00468362 /* DragTestView.swift */,
 				99A0AAB82427FFB500F13F79 /* Assets.xcassets */,
 				99A0AABD2427FFB500F13F79 /* LaunchScreen.storyboard */,
@@ -119,7 +116,7 @@
 			);
 			name = EpicsApp;
 			productName = EpicsApp;
-			productReference = 99A0AAAF2427FFB300F13F79 /* EpicsApp.app */;
+			productReference = 99A0AAAF2427FFB300F13F79 /* Epics.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -181,7 +178,6 @@
 				995321CB24354DA100DDFA42 /* MyFeedView.swift in Sources */,
 				99846822242D529C00468362 /* DragTestView.swift in Sources */,
 				992F9E5D24415EE000B47020 /* StoryView.swift in Sources */,
-				99846820242D4E5200468362 /* FetchTestView.swift in Sources */,
 				99846824242EA27B00468362 /* OnboardView.swift in Sources */,
 				99A0AAB52427FFB300F13F79 /* SceneDelegate.swift in Sources */,
 				99A0AAB72427FFB300F13F79 /* ContentView.swift in Sources */,
@@ -331,9 +327,9 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.carloforrest.EpicsApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Epics;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -352,9 +348,9 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.carloforrest.EpicsApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Epics;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

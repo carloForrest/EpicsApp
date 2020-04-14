@@ -11,6 +11,9 @@ import SwiftUI
 struct ResultsView: View {
     @Binding var showStory: Bool
     @Binding var showFeed: Bool
+    @State var cardState = CGSize.zero
+    @State var cardState2 = false
+    @State var cardState3 = false
     
     
     var body: some View {
@@ -25,7 +28,7 @@ struct ResultsView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("These players match you.")
-                                .font(.system(size: 36))
+                                .font(.system(size: 28))
                                 .font(.title)
                                 .kerning(-1)
                                 .fontWeight(.bold)
@@ -51,7 +54,6 @@ struct ResultsView: View {
                 .edgesIgnoringSafeArea(.all)
                 )
                 
-                Spacer()
                 
                 //Cards
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -60,7 +62,7 @@ struct ResultsView: View {
                             Spacer()
                                 .frame(width: 40, height: 360)
                         }
-                        ForEach(playerData.shuffled()) { item in
+                        ForEach(playerData) { item in
                             GeometryReader { geometry in
                                 PlayerCardMiniView(player: item)
                                     .rotation3DEffect(Angle(degrees:
@@ -68,6 +70,33 @@ struct ResultsView: View {
                                     ), axis: (x: 0, y: 20, z: 0))
                             }
                             .frame(width: 260, height: 400)
+                            .offset(x: self.cardState.width)
+                            .animation(.spring())
+                            .gesture(
+                                DragGesture().onChanged { value in
+                                    self.cardState = value.translation
+                                    if self.cardState2 {
+                                        self.cardState.width += -270
+                                    } else if self.cardState3 {
+                                        self.cardState.width += -532
+                                    }
+                                }
+                                .onEnded { value in
+                                    if self.cardState.width < -127 && self.cardState.width > -400 {
+                                        self.cardState.width = -270
+                                        self.cardState2 = true
+                                        
+                                    } else if self.cardState.width < -400 {
+                                        self.cardState.width = -532
+                                        self.cardState3 = true
+                                        
+                                    } else if self.cardState.width > -127 {
+                                        self.cardState.width = 0
+                                        self.cardState3 = false
+                                        self.cardState2 = false
+                                    }
+                                }
+                            )
                             .onTapGesture {
                                 withAnimation {
                                     self.showStory.toggle()
@@ -84,9 +113,58 @@ struct ResultsView: View {
                     .offset(x: 0, y: 0)
                 }
                 
+                VStack(alignment: .leading) {
+                    HStack(alignment: .bottom) {
+                        Text("Interest Score:")
+                            .font(.system(size: 18))
+                            .font(.headline)
+                            .kerning(-1)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
+                        Text(cardState2 ? "87%" : "98%")
+                            .font(.system(size: 24))
+                            .font(.headline)
+                            .kerning(-1)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
+                    }
+                    HStack(spacing: 2) {
+                        Rectangle()
+                            .foregroundColor(Color(#colorLiteral(red: 0.4509803922, green: 0.3843137255, blue: 0.968627451, alpha: 1)))
+                            .opacity(0.2)
+                        Rectangle()
+                            .foregroundColor(Color(#colorLiteral(red: 0.4509803922, green: 0.3843137255, blue: 0.968627451, alpha: 1)))
+                            .opacity(0.4)
+                        Rectangle()
+                            .foregroundColor(Color(#colorLiteral(red: 0.4509803922, green: 0.3843137255, blue: 0.968627451, alpha: 1)))
+                            .opacity(0.6)
+                        Rectangle()
+                            .foregroundColor(Color(#colorLiteral(red: 0.4509803922, green: 0.3843137255, blue: 0.968627451, alpha: 1)))
+                            .opacity(0.8)
+                        Rectangle()
+                            .foregroundColor(Color(#colorLiteral(red: 0.4509803922, green: 0.3843137255, blue: 0.968627451, alpha: 1)))
+                            .opacity(1)
+                    }
+                    .frame(height: 6)
+                    .overlay(
+                        Circle()
+                            .frame(width: 12, height: 12, alignment: .leading)
+                            .foregroundColor(Color.white)
+                            .offset(x: cardState2 ? 120 : 156)
+                            .offset(x: cardState3 ? -30 : 0)
+                            .animation(Animation.easeInOut(duration: 0.4).delay(0.2))
+                    )
+                    
+                }
+                .padding(.horizontal, 32)
+                
                 Spacer()
                 
                 Button(action: { self.showFeed.toggle() }) {
+
+                    //Text("\(cardState.width)")
+                    //    .foregroundColor(Color.white)
+                    
                     Text(/*@START_MENU_TOKEN@*/"Follow Player"/*@END_MENU_TOKEN@*/.uppercased())
                         .foregroundColor(Color(#colorLiteral(red: 0.8684264921, green: 0.8684264921, blue: 1, alpha: 1)))
                         .kerning(3)
@@ -160,6 +238,46 @@ struct PlayerCardMiniView: View {
                 .padding(.bottom, 8)
                 
                 HStack {
+                    VStack {
+                        Text("\(player.ppg)")
+                            .font(.headline)
+                            .fontWeight(.black)
+                            .foregroundColor(Color.white)
+                            .kerning(1)
+                        Text("PPG")
+                            .font(.system(size: 12, design: .monospaced))
+                            .foregroundColor(Color.white)
+                            .kerning(3)
+                    }
+                    Spacer()
+                    VStack {
+                        Text("8.4")
+                            .font(.headline)
+                            .fontWeight(.black)
+                            .foregroundColor(Color.white)
+                            .kerning(1)
+                        Text("APG")
+                        .font(.system(size: 12, design: .monospaced))
+                        .foregroundColor(Color.white)
+                        .kerning(3)
+                    }
+                    Spacer()
+                    VStack {
+                        Text("3.5")
+                            .font(.headline)
+                            .fontWeight(.black)
+                            .foregroundColor(Color.white)
+                            .kerning(1)
+                        Text("RPG")
+                            .font(.system(size: 12, design: .monospaced))
+                            .foregroundColor(Color.white)
+                            .kerning(3)
+                    }
+                }
+                .padding(.bottom, 12)
+                .padding(.horizontal, 8)
+                
+                HStack {
                     Text("View Story".uppercased())
                         .font(.subheadline)
                         .kerning(3)
@@ -195,6 +313,7 @@ struct Player: Identifiable {
     var lastName: String
     var att1: String
     var att2: String
+    var ppg: String
 }
 
 let playerData = [
@@ -202,24 +321,27 @@ let playerData = [
         image: "card-kyle",
         firstName: "Kyle",
         lastName: "Lowry",
-        att1: "98%|Experienced",
-        att2: "94%|Versatile"
+        att1: "97%|Leader",
+        att2: "94%|Expressive",
+        ppg: "14.7"
     ),
     
     Player(
         image: "card-lebron",
         firstName: "Lebron",
         lastName: "James",
-        att1: "98%|Experienced",
-        att2: "96%|Versatile"
+        att1: "99%|Experienced",
+        att2: "87%|Versatile",
+        ppg: "27.1"
     ),
     
     Player(
         image: "card-steph",
         firstName: "Stephen",
         lastName: "Curry",
-        att1: "93%|Experienced",
-        att2: "87%|Leader"
+        att1: "84%|Experienced",
+        att2: "78%|Leader",
+        ppg: "23.1"
     ),
     
 ]

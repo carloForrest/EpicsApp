@@ -23,19 +23,20 @@ struct ContentView: View {
             
             
             OnboardView(stepCounter: $stepCounter)
-            
+ 
             //QuizView(tapCount: $tapCount)
             
-            if stepCounter == 5 {
+            if stepCounter >= 5 {
                 QuizView(tapCount: $tapCount)
                     .transition(.slide)
-                    .animation(.easeOut(duration: 0.8))
+                    .animation(.spring())
+                
+                
             }
             
             if tapCount == 5 {
                 ResultsView(showStory: $showStory, showFeed: $showFeed)
                     .transition(.slide)
-                    .animation(.easeOut(duration: 0.8))
             }
             
             //ResultsView(showStory: $showStory)
@@ -44,7 +45,6 @@ struct ContentView: View {
                 
                 StoryView(storyCount: $storyCount, showStory: $showStory)
                     .transition(.scale)
-                    .animation(.easeOut(duration: 0.4))
             }
             
             
@@ -52,17 +52,15 @@ struct ContentView: View {
                 
                 MyFeedView(showQuiz: $showQuiz)
                     .transition(.slide)
-                    .animation(.easeOut(duration: 0.8))
                 
             }
             
             
             
             if showQuiz {
-                
+                                
                 QuizView(tapCount: .constant(0))
                     .transition(.opacity)
-                    .animation(.easeOut(duration: 0.4))
                 
             }
             

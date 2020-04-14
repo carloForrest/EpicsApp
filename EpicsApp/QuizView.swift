@@ -21,27 +21,24 @@ struct QuizView: View {
             
             VStack {
                 //PageHeader
-                VStack(alignment: .leading) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("What do you value more?")
-                                .font(.system(size: 32))
-                                .font(.title)
-                                .kerning(-1)
-                                .fontWeight(.bold)
-                                .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
-                            Text("Tell us about you.")
-                                .font(.system(size: 18))
-                                .font(.headline)
-                                .kerning(0.5)
-                                .fontWeight(.regular)
-                                .foregroundColor(Color(#colorLiteral(red: 0.768627451, green: 0.768627451, blue: 0.9098039216, alpha: 1)))
-                        }
-                        .padding(.top, 48)
-                        .padding(.bottom, 32)
-                        .padding(.horizontal, 24)
-                        Spacer()
+                VStack(alignment: .leading){
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("What do you value more?")
+                            .font(.system(size: 28))
+                            .font(.title)
+                            .kerning(-1)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9921568627, alpha: 1)))
+                        Text("Epics will recommend players that match you based on your answers.")
+                            .font(.system(size: 18, weight: .regular))
+                            .kerning(0.5)
+                            .foregroundColor(Color(#colorLiteral(red: 0.768627451, green: 0.768627451, blue: 0.9098039216, alpha: 1)))
+                            .fixedSize(horizontal: false, vertical: true)
                     }
+                    .padding(.top, 48)
+                    .padding(.bottom, 24)
+                    .padding(.horizontal, 24)
+                    
                     RoundedRectangle(cornerRadius: 2)
                         .foregroundColor(Color(#colorLiteral(red: 0.3921568627, green: 0.3921568627, blue: 0.7882352941, alpha: 1)))
                         .frame(maxWidth: CGFloat(tapCount*80), minHeight: 2, maxHeight: 2)
@@ -53,78 +50,77 @@ struct QuizView: View {
                     .edgesIgnoringSafeArea(.all)
                 )
                 
-                ScrollView(.vertical, showsIndicators: false)  {
-                    VStack(spacing: 16) {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(0 ..< (20 - tapCount*2)) { item in
-                                    GeometryReader { geometry in
-                                        HStack {
-                                            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                                        }
-                                        .background(Color.white)
-                                        .cornerRadius(4)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 2 * CGFloat(self.tapCount))
-                                                .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.5)), lineWidth: 2)
-                                        )
+                VStack(spacing: 16) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 16) {
+                            ForEach(0 ..< 20) { item in
+                                GeometryReader { geometry in
+                                    HStack {
+                                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
                                     }
-                                    .frame(width: 50 + CGFloat(self.tapCount*25), height: 80 + CGFloat(self.tapCount*50))
+                                    .background(Color.white)
+                                    .cornerRadius(4)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.5)), lineWidth: 2)
+                                    )
                                 }
+                                .frame(width: 50, height: 80)
                             }
-                            .offset(x: show ? -30 : 0, y: 0)
-                            .animation(Animation.linear(duration: 20).repeatForever(autoreverses: true))
-                            .onAppear {self.show = true}
                         }
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(0 ..< (20 - tapCount*2)) { item in
-                                    GeometryReader { geometry in
-                                        HStack {
-                                            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                                        }
-                                        .background(Color.white)
-                                        .cornerRadius(4)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 2 * CGFloat(self.tapCount))
-                                                .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.5)), lineWidth: 2)
-                                        )
-                                    }
-                                    .frame(width: 50 + CGFloat(self.tapCount*25), height: 80 + CGFloat(self.tapCount*50))
-                                }
-                            }
-                            .offset(x: show ? 0 : -80, y: 0)
-                            .animation(Animation.linear(duration: 20).repeatForever(autoreverses: true))
-                            .onAppear {self.show = true}
-                        }
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(0 ..< (20 - tapCount*2)) { item in
-                                    GeometryReader { geometry in
-                                        HStack {
-                                            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                                        }
-                                        .background(Color.white)
-                                        .cornerRadius(4)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 2 * CGFloat(self.tapCount))
-                                                .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.5)), lineWidth: 2)
-                                        )
-                                    }
-                                    .frame(width: 50 + CGFloat(self.tapCount*25), height: 80 + CGFloat(self.tapCount*50))
-                                }
-                            }
-                            .offset(x: show ? -100 : 0, y: 0)
-                            .animation(Animation.linear(duration: 20).repeatForever(autoreverses: true))
-                            .onAppear {self.show = true}
-                        }
+                        .offset(x: show ? -30 : 0, y: 0)
+                        .animation(Animation.linear(duration: 14).repeatForever(autoreverses: true))
+                        .onAppear {self.show = true}
                     }
+                    .padding()
                     
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 16) {
+                            ForEach(0 ..< 20) { item in
+                                GeometryReader { geometry in
+                                    HStack {
+                                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    }
+                                    .background(Color.white)
+                                    .cornerRadius(4)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.5)), lineWidth: 2)
+                                    )
+                                }
+                                .frame(width: 50, height: 80)
+                                .animation(.easeOut(duration: 0.4))
+                            }
+                        }
+                        .offset(x: show ? 0 : -80, y: 0)
+                        .animation(Animation.linear(duration: 10).repeatForever(autoreverses: true))
+                        .onAppear {self.show = true}
+                    }
+                    .padding()
                     
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 16) {
+                            ForEach(0 ..< 20) { item in
+                                GeometryReader { geometry in
+                                    HStack {
+                                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1764705882, green: 0.1764705882, blue: 0.2745098039, alpha: 1)), Color(#colorLiteral(red: 0.168627451, green: 0.1647058824, blue: 0.2705882353, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    }
+                                    .background(Color.white)
+                                    .cornerRadius(4)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .stroke(Color(#colorLiteral(red: 0.3882352941, green: 0.3882352941, blue: 0.9843137255, alpha: 0.5)), lineWidth: 2)
+                                    )
+                                }
+                                .frame(width: 50, height: 80)
+                            }
+                        }
+                        .offset(x: show ? -100 : 0, y: 0)
+                        .animation(Animation.linear(duration: 16).repeatForever(autoreverses: true))
+                        .onAppear {self.show = true}
+                    }
+                    .padding()
                 }
-                .padding(.top, 24)
                 
                 Spacer()
                 
